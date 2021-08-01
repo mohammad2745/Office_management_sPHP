@@ -93,3 +93,21 @@ CREATE TABLE ab_shop (
     TimeLocked DATETIME NULL,
     INDEX(ShopID)
 ) ENGINE = MyISAM;
+
+CREATE TABLE ab_expense (
+	ExpenseID INT(11) PRIMARY KEY AUTO_INCREMENT,  
+    ExpenseDate DATE NULL,
+    ExpenseVoucherNo VARCHAR(255) NULL,
+    ExpenseQuantity INT(11) NULL,
+    ExpenseRate INT(11) NULL,
+    ExpenseApprovedBy VARCHAR(255) NULL,
+    MemoID INT(11), 
+    UserIDInserted INT(11) NULL, 
+    UserIDUpdated INT(11) NULL, 
+    UserIDLocked INT(11) NULL, 
+    TimeInserted DATETIME NULL, 
+    TimeUpdated DATETIME NULL, 
+    TimeLocked DATETIME NULL,
+    INDEX(ExpenseID),
+    INDEX(MemoID)
+) ENGINE = MyISAM;
