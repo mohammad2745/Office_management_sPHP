@@ -129,7 +129,7 @@ if(isset($_POST["btnInput"])){
 	$EM->InputUIHTML([
 		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), null, "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Title") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Category") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Category") . "", [new Option(), new Option("Electronics", "Electronics"), new Option("Groceries", "Groceries"), new Option("Gadget", "Gadget"), new Option("Stationary", "Stationary")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Address") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Area") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Detail") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
