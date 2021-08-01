@@ -40,3 +40,4 @@
 FROM			ab_employeesalary AS ES
 	LEFT JOIN		ab_employee AS E ON E.E...' at line 4. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
 [28-Jul-2021 11:13:58 Asia/Dhaka] User error: Undefined index: MemoName in D:\xampp\htdocs\officeManagement\script\management\generic\memo.php on line 29
+[01-Aug-2021 11:27:43 Asia/Dhaka] User error: Undefined index: EmployeeMobile No1 in D:\xampp\htdocs\sPHP\library\object\html\ui\datagrid.php on line 427
