@@ -66,3 +66,11 @@ FROM			ab_employeesalary AS ES
 [02-Aug-2021 17:51:18 Asia/Dhaka] User error: Database: 42S22: Unknown column 'R.RevenueIsActive' in 'where clause'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
 [02-Aug-2021 17:53:36 Asia/Dhaka] User error: Database: 42S22: Unknown column 'R.RevenueIsActive' in 'where clause'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
 [02-Aug-2021 17:54:04 Asia/Dhaka] User error: Database: 42S22: Unknown column 'R.RevenueIsActive' in 'where clause'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
+[02-Aug-2021 22:20:04 Asia/Dhaka] User error: Database: 42000: Not unique table/alias: 'E'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
+[02-Aug-2021 22:20:26 Asia/Dhaka] User error: Undefined index: Project in D:\xampp\htdocs\officeManagement\script\management\generic\revenue.php on line 144
+[02-Aug-2021 22:31:22 Asia/Dhaka] User error: Database: 42000: Not unique table/alias: 'E'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
+[02-Aug-2021 22:36:37 Asia/Dhaka] User error: Undefined index: Project in D:\xampp\htdocs\officeManagement\script\management\generic\revenue.php on line 144
+[02-Aug-2021 22:40:23 Asia/Dhaka] User error: Undefined index: Project in D:\xampp\htdocs\officeManagement\script\management\generic\revenue.php on line 144
+[02-Aug-2021 22:41:07 Asia/Dhaka] User error: Undefined index: Project in D:\xampp\htdocs\officeManagement\script\management\generic\revenue.php on line 144
+[02-Aug-2021 22:41:14 Asia/Dhaka] User error: Undefined index: Project in D:\xampp\htdocs\officeManagement\script\management\generic\revenue.php on line 144
+[02-Aug-2021 22:41:45 Asia/Dhaka] User error: Database: 42S22: Unknown column 'R.RevenueIsActive' in 'where clause'. Origin: D:\xampp\htdocs\sPHP\library\object\database\table.php:104 in D:\xampp\htdocs\sPHP\library\object\database.php on line 521
