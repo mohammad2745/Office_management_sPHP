@@ -10,6 +10,8 @@ namespace sPHP;
 	<a href="./?_Script=Management/Generic/Memo">Memo</a>
 	<a href="./?_Script=Management/Generic/Shop">Shop</a>
 	<a href="./?_Script=Management/Generic/Expense">Expense</a>
+	<a href="./?_Script=Management/Generic/Revenue">Revenue</a>
+	<a href="./?_Script=Management/Generic/Cost">Cost</a>
 	<a href="./?_Script=User/SignIn">Sign in</a>
 	<a href="./?_Script=User/SignOut">Sign out</a> | <a href="./?_Script=User/Profile"><?=$User->Name()?></a>
 </header>
