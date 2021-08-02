@@ -151,6 +151,6 @@ CREATE TABLE ab_cost (
     TimeInserted DATETIME NULL, 
     TimeUpdated DATETIME NULL, 
     TimeLocked DATETIME NULL,
-    INDEX(ExpenseID),
-    INDEX(MemoID)
+    INDEX(CostID),
+    INDEX(RevenueID)
 ) ENGINE = MyISAM;

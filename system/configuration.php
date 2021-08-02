@@ -71,6 +71,8 @@
 												"" . ($Entity = "Memo") . "" => new Database\Table("{$Entity}", null, null, null, null, null, "ab_"),
 												"" . ($Entity = "Shop") . "" => new Database\Table("{$Entity}", null, null, null, null, null, "ab_"),
 												"" . ($Entity = "Expense") . "" => new Database\Table("{$Entity}", null, null, null, null, null, "ab_"),
+												"" . ($Entity = "Revenue") . "" => new Database\Table("{$Entity}", null, null, null, null, null, "ab_"),
+												"" . ($Entity = "Cost") . "" => new Database\Table("{$Entity}", null, null, null, null, null, "ab_"),
 											],
 
 
