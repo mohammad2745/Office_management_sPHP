@@ -113,3 +113,44 @@ CREATE TABLE ab_expense (
     INDEX(ExpenseID),
     INDEX(MemoID)
 ) ENGINE = MyISAM;
+
+CREATE TABLE ab_revenue (
+	RevenueID INT(11) PRIMARY KEY AUTO_INCREMENT, 
+    RevenueProjectTitle VARCHAR(255) NULL, 
+    RevenueDate DATE NULL,
+    RevenuePaymentMethod VARCHAR(255) NULL,
+    RevenuePayee VARCHAR(255) NULL,
+    RevenueMobileBankingID VARCHAR(255) NULL,
+    RevenueTransactionID VARCHAR(255) NULL,
+    RevenueMobileCheckNo VARCHAR(255) NULL,
+    RevenueMobileBankName VARCHAR(255) NULL,
+    RevenueMobileBankBranch VARCHAR(255) NULL,
+    RevenueTotalAmount INT(11) NULL,
+    MemoID INT(11), 
+    UserIDInserted INT(11) NULL, 
+    UserIDUpdated INT(11) NULL, 
+    UserIDLocked INT(11) NULL, 
+    TimeInserted DATETIME NULL, 
+    TimeUpdated DATETIME NULL, 
+    TimeLocked DATETIME NULL,
+    INDEX(RevenueID)
+) ENGINE = MyISAM;
+
+CREATE TABLE ab_cost (
+	CostID INT(11) PRIMARY KEY AUTO_INCREMENT, 
+    CostTitle VARCHAR(255) NULL, 
+    CostDate DATE NULL,
+    CostVoucherNo VARCHAR(255) NULL,
+    CostType VARCHAR(255) NULL,
+    CostTotalAmount INT(11) NULL,
+    CostStatus VARCHAR(255) NULL,
+    RevenueID INT(11), 
+    UserIDInserted INT(11) NULL, 
+    UserIDUpdated INT(11) NULL, 
+    UserIDLocked INT(11) NULL, 
+    TimeInserted DATETIME NULL, 
+    TimeUpdated DATETIME NULL, 
+    TimeLocked DATETIME NULL,
+    INDEX(ExpenseID),
+    INDEX(MemoID)
+) ENGINE = MyISAM;
