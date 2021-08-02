@@ -2,35 +2,35 @@
 namespace sPHP;
 
 #region Entity management common configuration
-$EM = new EntityManagement($Table[$Entity = "Memo"]);
+$EM = new EntityManagement($Table[$Entity = "Expense"]);
 
 # ImportField is used to Upload csv file for data insert, make sure all required fields.
 $EM->ImportField([
-	new Database\Field("{$Entity}" . ($Field = "Title") . "", "{$Field}"),
-	new Database\Field("{$Entity}" . ($Field = "Item") . "", "{$Field}"),
-	new Database\Field("{$Entity}" . ($Field = "Description") . "", "{$Field}"),
-	new Database\Field("{$Entity}" . ($Field = "Quantity") . "", "{$Field}"),
+	new Database\Field("" . ($Field = "Memo") . "ID", "" . ($Column = "{$Field}Name") . "", null, $Table["{$Field}"], null),
 ]);
 
 # InputValidation is used to input type validation & required fields.
 $EM->InputValidation([
-	new HTTP\InputValidation("EmployeeID", true, VALIDATION_TYPE_INTEGER),
+	new HTTP\InputValidation("MemoID", true, VALIDATION_TYPE_INTEGER),
 ]);
 
 # ValidateInput is used to check custom query input validation.
 $EM->ValidateInput(function($Entity, $Database, $Table, $PrimaryKey, $ID){
 	$Result = true;
 
+	// $SalaryMonth = date('m', strtotime($_POST["EmployeeSalaryDate"]));
+	// $SalaryYear = date('Y', strtotime($_POST["EmployeeSalaryDate"]));
+
 	// if($Table->Get( // Check for duplicate values for UNIQUE columns
 	// 	//Check same person have same address
 	// 	"
-	// 		(
-	// 				{$Table->Alias()}." . ($Column = "EmployeeID") . " = " . intval($_POST["{$Column}"]) . "
-	// 			AND	" . ($Column = "{$Entity}Name") . " = '{$Database->Escape($_POST["{$Column}"])}'
+	// 		(	
+	// 			{$Table->Alias()}." . ($Column = "EmployeeID") . " = " . intval($_POST["{$Column}"]) . "
+	// 			AND	MONTH (" . ($Column = "{$Entity}Date") . ") = " . $SalaryMonth . "
+	// 			AND	YEAR (" . ($Column = "{$Entity}Date") . ") = " . $SalaryYear . "
 	// 		)
-	// 		AND	{$PrimaryKey} <> {$ID}
 	// 	"
-	// , null, null, null, null, null, null))$Result = "Same person and address name for the same " . strtolower($Table->FormalName()) . " exists!";
+	// , null, null, null, null, null, null))$Result = "This employee salary has been already paid !";
 
 	return $Result;
 });
@@ -52,10 +52,12 @@ $EM->DefaultFromSearchColumn("xTerminalID, xCustomerID, xCarrierID");
 
 # ListColumn shows available datagrid with fields caption, fields value etc.
 $EM->ListColumn([
+  new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TitleMemoID") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Title") . "", "{$Caption}", null),
-	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Category") . "", "{$Caption}", null),
-	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Item") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "VoucherNo") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TotalAmount") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Date") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Status") . "", "{$Caption}", null),
 ]);
 
 # Action is an part of datagrid columns. It's show every records.
@@ -114,8 +116,10 @@ if(isset($_POST["btnInput"])){
 	$NewRecordMode = isset($_POST["{$Entity}ID"]) && intval($_POST["{$Entity}ID"]) ? false : true;
 
 	if(isset($_POST["btnSubmit"])){
-		#region Custom code
 		#endregion Custom code
+		// $_POST["EmployeeSalaryDate"] = date("Y-m-d");
+		#region Custom code
+		// debugdump($_POST);
 
 		if($EM->Input()){
 			$Terminal->Redirect("{$_POST["_Referer"]}&SucceededAction=Input"); // Redirect to previous location
@@ -128,13 +132,14 @@ if(isset($_POST["btnInput"])){
 
 	# Input Form Section
 	$EM->InputUIHTML([
-		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), null, "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Memo") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), null, "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Title") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Category") . "", [new Option(), new Option("Food", "Food"), new Option("Salary", "Salary"), new Option("Furniture", "Furniture"), new Option("Utilities", "Utilities"), new Option("Miscellaneous", "Miscellaneous")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Item") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Description") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Date") . "", $EM->InputWidth(), DATE("Y-m-d"), null, INPUT_TYPE_DATE), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Quantity") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Date") . "", $EM->InputWidth(), null, null, INPUT_TYPE_DATE), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Rate") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Total") . "Amount", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+    // HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Total") . "Amount", $EM->InputWidth(), null, null, null, null, null, null, "{$Entity}TotalAmount", null, null, null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Status") . "", [new Option(), new Option("Pending For Approval", "Pending For Approval"), new Option("Approved - HASNAIN M REYAD - MD", "Approved - HASNAIN M REYAD - MD"), new Option("Approved - WAHIDUL ISLAM - CTO", "Approved - WAHIDUL ISLAM - CTO"), new Option("Cancelled", "Cancelled")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 	]);
 
 	# Print the input form
@@ -144,14 +149,15 @@ if(isset($_POST["btnInput"])){
 # Sql Search Section
 $EM->SearchSQL([
 	"1 = 1", // Custom fixed search condition
-	SetVariable("{$Configuration["SearchInputPrefix"]}" . ($Column = "EmployeeID") . "", SetVariable($Column)) ? "{$Table["{$Entity}"]->Alias()}.{$Column} = " . intval($_POST["{$Configuration["SearchInputPrefix"]}{$Column}"]) . "" : null,
+	SetVariable("{$Configuration["SearchInputPrefix"]}" . ($Column = "MemoID") . "", SetVariable($Column)) ? "{$Table["{$Entity}"]->Alias()}.{$Column} = " . intval($_POST["{$Configuration["SearchInputPrefix"]}{$Column}"]) . "" : null,
 ]);
 
 # Searching form html
 $EM->SearchUIHTML([
-	HTML\UI\Field(HTML\UI\Select("{$Configuration["SearchInputPrefix"]}" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get(null, "" . ($OptionEntityOrderBy = "{$OptionEntity}LookupCaption") . " ASC"), new Option(), "{$OptionEntityOrderBy}"), "{$Caption}", null, null),
+  HTML\UI\Field(HTML\UI\Select("{$Configuration["SearchInputPrefix"]}" . ($Caption = "Memo") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get(null, "" . ($OptionEntityOrderBy = "{$OptionEntity}LookupCaption") . " ASC"), new Option(), "{$OptionEntityOrderBy}"), "{$Caption}", null, null),
 	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Title") . "", 200), "{$Caption}", null, true),
-	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Description") . "", 200), "{$Caption}", null, true),
+	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Voucher") . "No", 200), "{$Caption}", null, true),
+
 ]);
 
 # Export data section
@@ -173,3 +179,19 @@ print "{$EM->ListHTML()}";
 if(SetVariable("SucceededAction") == "Input")print HTML\UI\Toast("{$Table["{$Entity}"]->FormalName()} input successful.");
 #region List
 ?>
+
+<script>
+	function salarycalc(basic){
+		BASIC = parseInt(basic.value);
+		HA = (BASIC * 15) / 100;
+		TA = (BASIC * 10) / 100;
+		MA = (BASIC * 5) / 100;
+		PA = (BASIC * 0) / 100;
+		FA = (BASIC * 5) / 100;
+		OTHER = (BASIC * 0) / 100;
+		TAX = (BASIC * 0) / 100;
+		VAT = (BASIC * 0) / 100;
+		TOTAL = BASIC + HA + TA + MA + PA - FA + OTHER - TAX - VAT;
+		document.getElementById("EmployeeSalaryTotalAmount").value = TOTAL ;
+	}
+</script>

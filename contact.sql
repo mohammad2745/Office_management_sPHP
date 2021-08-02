@@ -95,12 +95,14 @@ CREATE TABLE ab_shop (
 ) ENGINE = MyISAM;
 
 CREATE TABLE ab_expense (
-	ExpenseID INT(11) PRIMARY KEY AUTO_INCREMENT,  
+	ExpenseID INT(11) PRIMARY KEY AUTO_INCREMENT, 
+    ExpenseTitle VARCHAR(255) NULL, 
     ExpenseDate DATE NULL,
     ExpenseVoucherNo VARCHAR(255) NULL,
     ExpenseQuantity INT(11) NULL,
     ExpenseRate INT(11) NULL,
-    ExpenseApprovedBy VARCHAR(255) NULL,
+    ExpenseTotalAmount INT(11) NULL,
+    ExpenseStatus VARCHAR(255) NULL,
     MemoID INT(11), 
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
