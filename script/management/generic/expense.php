@@ -179,19 +179,3 @@ print "{$EM->ListHTML()}";
 if(SetVariable("SucceededAction") == "Input")print HTML\UI\Toast("{$Table["{$Entity}"]->FormalName()} input successful.");
 #region List
 ?>
-
-<script>
-	function salarycalc(basic){
-		BASIC = parseInt(basic.value);
-		HA = (BASIC * 15) / 100;
-		TA = (BASIC * 10) / 100;
-		MA = (BASIC * 5) / 100;
-		PA = (BASIC * 0) / 100;
-		FA = (BASIC * 5) / 100;
-		OTHER = (BASIC * 0) / 100;
-		TAX = (BASIC * 0) / 100;
-		VAT = (BASIC * 0) / 100;
-		TOTAL = BASIC + HA + TA + MA + PA - FA + OTHER - TAX - VAT;
-		document.getElementById("EmployeeSalaryTotalAmount").value = TOTAL ;
-	}
-</script>

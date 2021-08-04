@@ -41,6 +41,28 @@ CREATE TABLE `sphp_applicationchangelog` (
   `TimeLocked` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE `sphp_log` (
+  `LogID` int(11) NOT NULL,
+  `LogTime` datetime NOT NULL,
+  `LogType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogSource` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogSubject` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogAction` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogDescription` text COLLATE utf8_unicode_ci,
+  `LogDataType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogData` text COLLATE utf8_unicode_ci,
+  `LogCallerFile` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `LogCallerFileLine` int(11) DEFAULT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `LogIsActive` tinyint(1) NOT NULL DEFAULT '0',
+  `UserIDInserted` int(11) DEFAULT NULL,
+  `UserIDUpdated` int(11) DEFAULT NULL,
+  `UserIDLocked` int(11) DEFAULT NULL,
+  `TimeInserted` datetime DEFAULT NULL,
+  `TimeUpdated` datetime DEFAULT NULL,
+  `TimeLocked` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 -- --------------------------------------------------------
 
 --
