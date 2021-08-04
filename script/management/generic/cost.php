@@ -18,20 +18,6 @@ $EM->InputValidation([
 $EM->ValidateInput(function($Entity, $Database, $Table, $PrimaryKey, $ID){
 	$Result = true;
 
-	// $SalaryMonth = date('m', strtotime($_POST["EmployeeSalaryDate"]));
-	// $SalaryYear = date('Y', strtotime($_POST["EmployeeSalaryDate"]));
-
-	// if($Table->Get( // Check for duplicate values for UNIQUE columns
-	// 	//Check same person have same address
-	// 	"
-	// 		(	
-	// 			{$Table->Alias()}." . ($Column = "EmployeeID") . " = " . intval($_POST["{$Column}"]) . "
-	// 			AND	MONTH (" . ($Column = "{$Entity}Date") . ") = " . $SalaryMonth . "
-	// 			AND	YEAR (" . ($Column = "{$Entity}Date") . ") = " . $SalaryYear . "
-	// 		)
-	// 	"
-	// , null, null, null, null, null, null))$Result = "This employee salary has been already paid !";
-
 	return $Result;
 });
 
@@ -53,7 +39,7 @@ $EM->DefaultFromSearchColumn("xTerminalID, xCustomerID, xCarrierID");
 # ListColumn shows available datagrid with fields caption, fields value etc.
 $EM->ListColumn([
   new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Title") . "", "{$Caption}", null),
-	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "RevenueID") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("" . ($Caption = "Revenue") . "ProjectTitle", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Type") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TotalAmount") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Date") . "", "{$Caption}", null),
@@ -177,5 +163,3 @@ print "{$EM->ListHTML()}";
 if(SetVariable("SucceededAction") == "Input")print HTML\UI\Toast("{$Table["{$Entity}"]->FormalName()} input successful.");
 #region List
 ?>
-
-

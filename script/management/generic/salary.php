@@ -63,6 +63,7 @@ $EM->ListColumn([
 	new HTML\UI\Datagrid\Column("" . ($Caption = "Employee") . "Designation", "{$Caption}", null, null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Basic") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TotalAmount") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Status") . "", "{$Caption}", null),
 ]);
 
 # Action is an part of datagrid columns. It's show every records.

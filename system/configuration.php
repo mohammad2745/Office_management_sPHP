@@ -37,6 +37,7 @@
 		"CompanyPhone"					=>	"+8801552601833",
 		"CompanyEmail"					=>	"Info@{$Domain}",
 		"CompanyURL"					=>	"{$Environment->URL()}",
+		"BackgroundColor"				=>	"Yellow", 
 
 		"Name"							=>	"{$Name}",
 		"ShortName"						=>	"{$ShortName}",

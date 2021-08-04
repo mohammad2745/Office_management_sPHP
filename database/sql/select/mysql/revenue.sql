@@ -1,6 +1,7 @@
 SELECT			{ALIAS}.*, 
 				CONCAT({ALIAS}.RevenueProjectTitle, '') AS {ENTITY}LookupCaption, 
+				M.MemoTitle,
 				'' AS _Other
 
 FROM			{PREFIX}{NAME} AS {ALIAS}
-	/*LEFT JOIN		X AS Y ON Y.YID = {ALIAS}.YID*/
+	LEFT JOIN	ab_memo AS M ON M.MemoID  = {ALIAS}.MemoID

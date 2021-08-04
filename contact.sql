@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS ab_employee, ab_employeesalary;
+DROP TABLE IF EXISTS ab_employee, ab_employeesalary, ab_memo, ab_shop, ab_revenue, ab_cost, ab_expense;
 
 CREATE TABLE ab_employee (
 	EmployeeID INT(11) PRIMARY KEY AUTO_INCREMENT, 
@@ -19,7 +19,7 @@ CREATE TABLE ab_employee (
     EmployeeReferenceName VARCHAR(255) NULL,
     EmployeeReferenceMobileNo INT(20) NULL,
     EmployeeReferenceEmail VARCHAR(255) NULL, 
-    EmployeeIsActive INT(11) NULL,
+    EmployeeIsActive INT(11) NULL DEFAULT 1,
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
     UserIDLocked INT(11) NULL, 
@@ -46,6 +46,7 @@ CREATE TABLE ab_employeesalary (
     EmployeeSalaryPf INT(11) NULL,
     EmployeeSalaryTotalAmount INT(11) NULL,
     EmployeeSalaryStatus VARCHAR(255) NULL,
+    EmployeeSalaryIsActive INT(11) NULL DEFAULT 1,
     EmployeeID INT(11), 
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
@@ -65,6 +66,7 @@ CREATE TABLE ab_memo (
     MemoItem INT(11) NULL,
     MemoDescription VARCHAR(255) NULL,
     MemoQuantity VARCHAR(255) NULL,
+    MemoIsActive INT(11) NULL DEFAULT 1,
     EmployeeID INT(11), 
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
@@ -84,7 +86,7 @@ CREATE TABLE ab_shop (
     ShopDetail VARCHAR(255) NULL,
     ShopCategory VARCHAR(255) NULL,
     ShopMobileNo INT(20) NULL,
-    EmployeeID INT(11), 
+    ShopIsActive INT(11) NULL DEFAULT 1,
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
     UserIDLocked INT(11) NULL, 
@@ -104,6 +106,7 @@ CREATE TABLE ab_expense (
     ExpenseTotalAmount INT(11) NULL,
     ExpenseStatus VARCHAR(255) NULL,
     MemoID INT(11), 
+    ExpenseIsActive INT(11) NULL DEFAULT 1,
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
     UserIDLocked INT(11) NULL, 
@@ -127,6 +130,7 @@ CREATE TABLE ab_revenue (
     RevenueMobileBankBranch VARCHAR(255) NULL,
     RevenueTotalAmount INT(11) NULL,
     MemoID INT(11), 
+    RevenueIsActive INT(11) NULL DEFAULT 1,
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
     UserIDLocked INT(11) NULL, 
@@ -145,6 +149,7 @@ CREATE TABLE ab_cost (
     CostTotalAmount INT(11) NULL,
     CostStatus VARCHAR(255) NULL,
     RevenueID INT(11), 
+    CostIsActive INT(11) NULL DEFAULT 1,
     UserIDInserted INT(11) NULL, 
     UserIDUpdated INT(11) NULL, 
     UserIDLocked INT(11) NULL, 

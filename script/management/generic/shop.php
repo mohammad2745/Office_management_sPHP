@@ -14,23 +14,12 @@ new Database\Field("{$Entity}" . ($Field = "MobileNo") . "", "{$Field}"),
 
 # InputValidation is used to input type validation & required fields.
 $EM->InputValidation([
-	new HTTP\InputValidation("EmployeeID", true, VALIDATION_TYPE_INTEGER),
+	//new HTTP\InputValidation("EmployeeID", true, VALIDATION_TYPE_INTEGER),
 ]);
 
 # ValidateInput is used to check custom query input validation.
 $EM->ValidateInput(function($Entity, $Database, $Table, $PrimaryKey, $ID){
 	$Result = true;
-
-	// if($Table->Get( // Check for duplicate values for UNIQUE columns
-	// 	//Check same person have same address
-	// 	"
-	// 		(
-	// 				{$Table->Alias()}." . ($Column = "EmployeeID") . " = " . intval($_POST["{$Column}"]) . "
-	// 			AND	" . ($Column = "{$Entity}Name") . " = '{$Database->Escape($_POST["{$Column}"])}'
-	// 		)
-	// 		AND	{$PrimaryKey} <> {$ID}
-	// 	"
-	// , null, null, null, null, null, null))$Result = "Same person and address name for the same " . strtolower($Table->FormalName()) . " exists!";
 
 	return $Result;
 });
@@ -54,6 +43,7 @@ $EM->DefaultFromSearchColumn("xTerminalID, xCustomerID, xCarrierID");
 $EM->ListColumn([
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Title") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Address") . "", "{$Caption}", null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "MobileNo") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Category") . "", "{$Caption}", null),
 ]);
 
@@ -127,8 +117,7 @@ if(isset($_POST["btnInput"])){
 
 	# Input Form Section
 	$EM->InputUIHTML([
-		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), null, "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Title") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Title") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Category") . "", [new Option(), new Option("Electronics", "Electronics"), new Option("Groceries", "Groceries"), new Option("Gadget", "Gadget"), new Option("Stationary", "Stationary")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Address") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Area") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
@@ -142,13 +131,11 @@ if(isset($_POST["btnInput"])){
 
 # Sql Search Section
 $EM->SearchSQL([
-	"1 = 1", // Custom fixed search condition
-	SetVariable("{$Configuration["SearchInputPrefix"]}" . ($Column = "EmployeeID") . "", SetVariable($Column)) ? "{$Table["{$Entity}"]->Alias()}.{$Column} = " . intval($_POST["{$Configuration["SearchInputPrefix"]}{$Column}"]) . "" : null,
+
 ]);
 
 # Searching form html
 $EM->SearchUIHTML([
-	HTML\UI\Field(HTML\UI\Select("{$Configuration["SearchInputPrefix"]}" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get(null, "" . ($OptionEntityOrderBy = "{$OptionEntity}LookupCaption") . " ASC"), new Option(), "{$OptionEntityOrderBy}"), "{$Caption}", null, null),
 	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Title") . "", 200), "{$Caption}", null, true),
 	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Area") . "", 200), "{$Caption}", null, true),
 ]);

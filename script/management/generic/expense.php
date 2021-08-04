@@ -52,7 +52,7 @@ $EM->DefaultFromSearchColumn("xTerminalID, xCustomerID, xCarrierID");
 
 # ListColumn shows available datagrid with fields caption, fields value etc.
 $EM->ListColumn([
-  new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TitleMemoID") . "", "{$Caption}", null),
+  new HTML\UI\Datagrid\Column("" . ($Caption = "MemoTitle") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Title") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "VoucherNo") . "", "{$Caption}", null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TotalAmount") . "", "{$Caption}", null),

@@ -9,7 +9,7 @@ $EM->ImportField([
 	new Database\Field("{$Entity}" . ($Field = "Title") . "", "{$Field}"),
 	new Database\Field("{$Entity}" . ($Field = "Item") . "", "{$Field}"),
 	new Database\Field("{$Entity}" . ($Field = "Description") . "", "{$Field}"),
-	new Database\Field("{$Entity}" . ($Field = "Quantity") . "", "{$Field}"),
+new Database\Field("{$Entity}" . ($Field = "Quantity") . "", "{$Field}"),
 ]);
 
 # InputValidation is used to input type validation & required fields.
@@ -128,7 +128,7 @@ if(isset($_POST["btnInput"])){
 
 	# Input Form Section
 	$EM->InputUIHTML([
-		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), null, "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Select("" . ($Caption = "Employee") . "ID", $Table[$OptionEntity = "{$Caption}"]->Get("{$Table["{$OptionEntity}"]->Alias()}.{$OptionEntity}IsActive = 1", "{$OptionEntity}LookupCaption ASC"), new Option(), "{$OptionEntity}LookupCaption"), "{$Caption}", null, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Title") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Category") . "", [new Option(), new Option("Food", "Food"), new Option("Salary", "Salary"), new Option("Furniture", "Furniture"), new Option("Utilities", "Utilities"), new Option("Miscellaneous", "Miscellaneous")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Item") . "", $EM->InputWidth(), null, null), "{$Caption}", true, null, $EM->FieldCaptionWidth()),

@@ -4,5 +4,4 @@ SELECT			{ALIAS}.*,
 				'' AS _Other
 
 FROM			{PREFIX}{NAME} AS {ALIAS}
-	LEFT JOIN		ab_memo AS M ON M.MemoID = {ALIAS}.MemoID
-
+	LEFT JOIN	ab_memo AS M ON M.MemoID  = {ALIAS}.MemoID

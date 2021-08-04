@@ -12,7 +12,7 @@ $EM->ImportField([
 
 # InputValidation is used to input type validation & required fields.
 $EM->InputValidation([
-	new HTTP\InputValidation("ProjectTitle", true, VALIDATION_TYPE_INTEGER),
+	new HTTP\InputValidation("{$Entity}ProjectTitle", true, null),
 ]);
 
 # ValidateInput is used to check custom query input validation.
@@ -39,10 +39,10 @@ $EM->DefaultFromSearchColumn("xTerminalID, xCustomerID, xCarrierID");
 
 # ListColumn shows available datagrid with fields caption, fields value etc.
 $EM->ListColumn([
-	new HTML\UI\Datagrid\Column("" . ($Caption = "Project") . "Title", "{$Caption}", null, null),
-	new HTML\UI\Datagrid\Column("" . ($Caption = "Payee") . "", "{$Caption}", null, null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Project") . "Title", "{$Caption}", null, null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Payee") . "", "{$Caption}", null, null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Payment") . "Method", "{$Caption}", null),
-	new HTML\UI\Datagrid\Column("" . ($Caption = "Date") . "", "{$Caption}", null, null),
+	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "Date") . "", "{$Caption}", null, null),
 	new HTML\UI\Datagrid\Column("{$Entity}" . ($Caption = "TotalAmount") . "", "{$Caption}", null),
 ]);
 
@@ -121,12 +121,12 @@ if(isset($_POST["btnInput"])){
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Date") . "", $EM->InputWidth(), DATE("Y-m-d"), null, INPUT_TYPE_DATE), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Payee") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Select("{$Entity}" . ($Caption = "Payment") . "Method", [new Option(), new Option("Cash", "Cash"), new Option("Check", "Check"), new Option("Mobile Banking", "Mobile Banking"), new Option("Load", "Loan")]), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Mobile") . "BnakingID", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Mobile") . "BankingID", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Transaction") . "ID", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Bank") . "Name", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Bank") . "Branch", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}Bank" . ($Caption = "Branch") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Check") . "No", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
-		HTML\UI\Field(HTML\UI\Input("{$Entity}" . ($Caption = "Amount") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
+		HTML\UI\Field(HTML\UI\Input("{$Entity}Total" . ($Caption = "Amount") . "", $EM->InputWidth(), null, true), "{$Caption}", true, null, $EM->FieldCaptionWidth()),
 	]);
 
 	# Print the input form
@@ -136,12 +136,12 @@ if(isset($_POST["btnInput"])){
 # Sql Search Section
 $EM->SearchSQL([
   "1 = 1", // Custom fixed search condition
-	SetVariable("{$Configuration["SearchInputPrefix"]}" . ($Column = "{$Entity}Project") . "Tittle", SetVariable($Column)) ? "{$Table["{$Entity}"]->Alias()}.{$Column} LIKE '%{$Database->Escape($_POST["{$Configuration["SearchInputPrefix"]}{$Column}"])}%'" : null,
+	SetVariable("{$Configuration["SearchInputPrefix"]}" . ($Column = "{$Entity}ProjectTitle") . "", SetVariable($Column)) ? "{$Table["{$Entity}"]->Alias()}.{$Column} LIKE '%{$Database->Escape($_POST["{$Configuration["SearchInputPrefix"]}{$Column}"])}%'" : null,
 ]);
 
 # Searching form html
 $EM->SearchUIHTML([
-	HTML\UI\Field(HTML\UI\Select("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "Project") . "Title", $Table[$OptionEntity = "{$Caption}"]->Get(null, "" . ($OptionEntityOrderBy = "{$OptionEntity}LookupCaption") . " ASC"), new Option(), "{$OptionEntityOrderBy}"), "{$Caption}", null, null),
+	HTML\UI\Field(HTML\UI\Input("{$Configuration["SearchInputPrefix"]}{$Entity}" . ($Caption = "ProjectTitle") . "", 200), "{$Caption}", null, null),
 ]);
 
 # Export data section
